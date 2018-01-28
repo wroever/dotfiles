@@ -1,0 +1,28 @@
+[gc]
+    auto = 0
+
+[core]
+    editor = vim
+
+[include]
+    path = ~/.gitconfig.local
+
+[alias]
+    mycommits = "!me=$(git config --get user.name); \
+                 git log --author=\"$me\" --pretty=format:\"%h : %s\""
+    ca = commit -a
+    co = checkout
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+    aliases = config --get-regexp alias
+    dl = diff -w HEAD^ HEAD
+
+[push]
+    default = current
+    followTags = true
+
+[stash]
+    showPatch = true
