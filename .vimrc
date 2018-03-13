@@ -20,8 +20,10 @@ Plugin 'maksimr/vim-jsbeautify'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-syntastic/syntastic'
 " Plugin 'wookiehangover/jshint.vim'
 " End plugins
 
@@ -120,6 +122,7 @@ set expandtab
 " show tabs as chars
 set list
 set listchars=tab:>-
+" set listchars=tab:› ,eol:¬
 
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
@@ -209,12 +212,13 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.(git|hg|svn|metadata|project)|build|node_modules)$',
   \ 'file': '\v\.(exe|so|dll|pyc|class)$',
   \ }
+let g:ctrlp_max_files = 0
 " let g:ctrlp_user_command = [$WS_ROOT, 'cd %s && git ls-files -co --exclude-standard']
 
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ build
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   " WR NOTE: this is slow...
@@ -223,6 +227,28 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
+"
+" Syntastic settings
+"
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_eslint_exe = 'npm run eslint'
+" let g:syntastic_javascript_eslint_args = '-c ./.eslintrc.json'
+function! FindConfig(prefix, what, where)
+    let cfg = findfile(a:what, escape(a:where, ' ') . ';')
+    return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
+endfunction
+
+autocmd FileType javascript let b:syntastic_javascript_eslint_args =
+    \ get(g:, 'syntastic_javascript_eslint_args', '') .
+    \ FindConfig('-c', '.estlintrc.json', expand('<afile>:p:h', 1))
 
 "------------------------------------------------------------
 " Mappings
