@@ -37,3 +37,6 @@ set convert-meta off
 
 # Use Alt/Meta + Delete to delete the preceding word
 "\e[3;3~": kill-word
+
+# Use vi mode in bash (or any other tool that uses Readline)
+set editing-mode vi
