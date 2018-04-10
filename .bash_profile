@@ -49,8 +49,9 @@ done;
 unset file;
 
 # Prompt
-export PS1='[\[\e[91;1m\]\u\[\e[0m\]@\[\e[93m\]\h\[\e[0m\]:\[\e[0m\]\W]$(__git_ps1 "\[\e[90m\](%s)\[\e[0m\]")» \[\e[0m\]'
+export PS1='[\[\e[91;1m\]\u\[\e[0m\]@\[\e[93m\]\h\[\e[0m\]:\[\e[0m\]\W]$(__git_ps1 "\[\e[90m\]( %s)\[\e[0m\]")» \[\e[0m\]'
 export GIT_PS1_SHOWDIRTYSTATE="."
+export GIT_PS1_SHOWUNTRACKEDFILES="."
 export GIT_PS1_STATESEPARATOR=""
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
