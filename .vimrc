@@ -14,15 +14,16 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Begin plugins
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'pangloss/vim-javascript'
-Plugin 'maksimr/vim-jsbeautify'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'pangloss/vim-javascript'
+Plugin 'maksimr/vim-jsbeautify'
 Plugin 'vim-syntastic/syntastic'
 " Plugin 'wookiehangover/jshint.vim'
 " End plugins
@@ -249,6 +250,12 @@ endfunction
 autocmd FileType javascript let b:syntastic_javascript_eslint_args =
     \ get(g:, 'syntastic_javascript_eslint_args', '') .
     \ FindConfig('-c', '.estlintrc.json', expand('<afile>:p:h', 1))
+
+"
+" Recommended editorconfig settings
+"
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 
 "------------------------------------------------------------
 " Mappings
