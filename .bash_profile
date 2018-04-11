@@ -67,3 +67,8 @@ export GIT_PS1_STATESEPARATOR=""
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+VIRTUALENVWRAPPER_INIT=/usr/local/bin/virtualenvwrapper.sh
+[ -s "$VIRTUALENVWRAPPER_INIT" ] && source $VIRTUALENVWRAPPER_INIT
