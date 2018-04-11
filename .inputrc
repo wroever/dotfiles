@@ -39,4 +39,4 @@ set convert-meta off
 "\e[3;3~": kill-word
 
 # Use vi mode in bash (or any other tool that uses Readline)
-set editing-mode vi
+# set editing-mode vi
