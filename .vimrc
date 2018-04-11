@@ -33,10 +33,10 @@ call vundle#end()
 
 " Color scheme
 colorscheme badwolf
- 
+
 " Enable syntax highlighting
 syntax enable
- 
+
 " Display line numbers on the left
 set number
 
@@ -71,43 +71,43 @@ set hidden
 " window as mentioned above, and/or either of the following options:
 " set confirm
 " set autowriteall
- 
+
 " Better command-line completion - provides a graphical menu of matches you
 " can cycle through
 set wildmenu
- 
+
 " Show partial commands in the last line of the screen
 set showcmd
- 
+
 " Highlight searches (use <C-L> to temporarily turn off highlighting; see the
 " mapping of <C-L> below)
 set hlsearch
- 
+
 " Use case insensitive search, except when using capital letters
 set ignorecase
 set smartcase
- 
+
 " Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
- 
+
 " When opening a new line and no filetype-specific indenting is enabled, keep
 " the same indent as the line you're currently on. Useful for READMEs, etc.
 set autoindent
- 
+
 " Display the cursor position on the last line of the screen or in the status
 " line of a window
 set ruler
- 
+
 " Always display the status line, even if only one window is displayed
 set laststatus=2
- 
+
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
- 
+
 " Set the command window height to 2 lines, to avoid many cases of having to
 " "press <Enter> to continue"
 set cmdheight=2
- 
+
 " tabstop is the number of spaces a tab counts for. So, when Vim opens a file
 " and reads a <TAB> character, it uses that many spaces to visually show the
 " <TAB>.
@@ -127,7 +127,7 @@ set listchars=tab:>-
 
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
- 
+
 " Netrw tree settings
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -158,18 +158,18 @@ map <silent> <C-E> :call ToggleVExplorer()<CR>
 " Splits
 set splitbelow
 set splitright
-set fillchars+=vert:\ 
+set fillchars+=vert:\
 
 " Folds
 let g:vimsyn_folding = 'af' " augroups + functions
-" set foldmethod=syntax 
+" set foldmethod=syntax
 
 " JSHint plugin - check on writes only
 " let JSHintUpdateWriteOnly=1
 
 " vim-javascript plugin
 let g:javascript_plugin_jsdoc = 1
- 
+
 " airline
 let g:airline_powerline_fonts = 1
 
@@ -306,3 +306,11 @@ nnoremap <C-G> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 " map <F4> :execute \" grep -srnw --binary-files=without-match --exclude-dir=.git --exclude-from=exclude.list . -e \" . expand("<cword>") . \" \" <bar> cwindow<CR>
+
+
+"------------------------------------------------------------
+" Source host-specific configs
+"
+if filereadable(".vimrc.local")
+    source .vimrc.local
+endif
