@@ -11,8 +11,12 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:jobs:history:clear"
 shopt -s histappend                             # Append to history, don't overwrite it
 shopt -s cmdhist                                # Save multi-line commands as one command
 
-# Editor
+# Default editor
 export EDITOR="vim"
+
+# Prevent file overwrite on stdout redirection
+# Use `>|` to force redirection to an existing file
+set -o noclobber
 
 # Make bash check its window size after a process completes
 shopt -s checkwinsize
@@ -49,8 +53,9 @@ for file in ~/.{git-completion.bash,git-prompt.sh,extras,path,aliases,functions}
 done;
 unset file;
 
-# Prompt
-export PS1='[\[\e[91;1m\]\u\[\e[0m\]@\[\e[93m\]\h\[\e[0m\]:\[\e[0m\]\W]$(__git_ps1 "\[\e[90m\]( %s)\[\e[0m\]")» \[\e[0m\]'
+# Prompt string
+(( BASH_VERSINFO[0] > 3 )) && PROMPT_DIRTRIM=2 # Automatically trim long paths in the prompt (requires Bash 4.x)
+export PS1='[\[\e[91;1m\]\u\[\e[0m\]@\[\e[93m\]\h\[\e[0m\]:\[\e[0m\]\w]$(__git_ps1 "\[\e[90m\]( %s)\[\e[0m\]")» \[\e[0m\]'
 export GIT_PS1_SHOWDIRTYSTATE="."
 export GIT_PS1_SHOWUNTRACKEDFILES="."
 export GIT_PS1_STATESEPARATOR=""
