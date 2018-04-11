@@ -21,8 +21,9 @@ shopt -s checkwinsize
 export GREP_OPTIONS='--color=auto'
 if command -v dircolors > /dev/null 2>&1;
 then
-    # Per github.com/trapd00r/LS_COLORS
-    command -v gdircolors >/dev/null 2>&1 || alias gdircolors="dircolors"
+    eval "$(dircolors -b ~/.dircolors)"
+elif command -v gdircolors > /dev/null 2>&1;
+then
     eval "$(gdircolors -b ~/.dircolors)"
 else
     export CLICOLOR=YES
