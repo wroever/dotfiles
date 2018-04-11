@@ -4,7 +4,7 @@
 # Also symlinks ~/bin for easy updating
 
 # Largely (entirely) borrowed from paulirish's script here:
-# https://raw.githubusercontent.com/paulirish/dotfiles/master/symlink-setup.sh 
+# https://raw.githubusercontent.com/paulirish/dotfiles/master/symlink-setup.sh
 # ...which in turn is based on:
 # https://raw.githubusercontent.com/alrra/dotfiles/master/os/create_symbolic_links.sh
 
@@ -101,7 +101,7 @@ print_success() {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Finds all .dotfiles in this folder
-declare -a FILES_TO_SYMLINK=$(find . -type f -maxdepth 1 -name ".*" -not -name .DS_Store -not -name .git -not -name .osx | sed -e 's|//|/|' | sed -e 's|./.|.|')
+declare -a FILES_TO_SYMLINK=$(find . -type f -maxdepth 1 -name ".*" -not -name .DS_Store -not -name .git -not -name .gitmodules -not -name .osx | sed -e 's|//|/|' | sed -e 's|./.|.|')
 FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin"
 
 main() {
