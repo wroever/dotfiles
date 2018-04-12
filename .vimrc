@@ -89,7 +89,7 @@ set hidden
 " Splits
 set splitbelow
 set splitright
-set fillchars+=vert:\
+set fillchars+=vert:\ 
 
 " Folds
 let g:vimsyn_folding = 'af' " augroups + functions
