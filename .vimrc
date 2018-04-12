@@ -126,14 +126,17 @@ set autoindent
 " tabstop is the number of spaces a tab counts for. So, when Vim opens a file
 " and reads a <TAB> character, it uses that many spaces to visually show the
 " <TAB>.
-set tabstop=4
+set tabstop=2
 " softabstop is the number of spaces a tab counts for when editing. So this
 " value is the number of spaces that is inserted when you hit <TAB> and also
 " the number of spaces that are removed when you backspace.
-set softtabstop=4
+set softtabstop=2
 " expandtab turns <TAB>s into spaces. That's it. So <TAB> just becomes a
 " shortcut for 'insert four spaces'.
 set expandtab
+" shiftwidth controls how many columns text is indented with the reindent
+" operations
+set shiftwidth=2
 
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
