@@ -27,6 +27,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'pangloss/vim-javascript'
 Plugin 'maksimr/vim-jsbeautify'
+Plugin 'junegunn/vim-easy-align'
 " End plugins
 
 call vundle#end()
@@ -89,12 +90,11 @@ set hidden
 " Splits
 set splitbelow
 set splitright
-set fillchars+=vert:\ 
+set fillchars+=vert:\│
 
 " Folds
 let g:vimsyn_folding = 'af' " augroups + functions
 
-" set foldmethod=syntax
 " Better command-line completion - provides a graphical menu of matches you
 " can cycle through
 set wildmenu
@@ -210,7 +210,6 @@ else
     \ }
 endif
 
-
 " editorconfig recommended
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
@@ -237,6 +236,13 @@ autocmd FileType javascript let b:syntastic_javascript_eslint_args =
 " vim-javascript plugin
 let g:javascript_plugin_jsdoc = 1
 
+" Don't list quickfix windows in buffer list (and don't navigate to them on
+" bnext, bprev)
+augroup qf
+    autocmd!
+    autocmd FileType qf set nobuflisted
+augroup END
+
 " EJS file-handling
 autocmd FileType ejs setlocal shiftwidth=4 tabstop=4 syntax=html
 
@@ -249,6 +255,20 @@ autocmd FileType python set makeprg=python\ %
 let mapleader = ","
 
 nnoremap <silent> <C-X> :make<CR>
+
+" Folds
+let b:folded = 0
+function! ToggleFolds()
+  if( !exists('b:folded') || b:folded == 0 )
+    setlocal foldmethod=syntax
+    exec "normal! zM"
+    let b:folded = 1
+  else
+    exec "normal! zR"
+    let b:folded = 0
+  endif
+endfunction
+nnoremap <silent> <leader>f :call ToggleFolds()<CR>
 
 " Splits
 " nnoremap <C-J> <C-W><C-J>
@@ -277,6 +297,12 @@ autocmd FileType json vnoremap <buffer> <C-O> :call RangeJsonBeautify()<CR>
 autocmd FileType jsx vnoremap <buffer> <C-O> :call RangeJsxBeautify()<CR>
 autocmd FileType html vnoremap <buffer> <C-O> :call RangeHtmlBeautify()<CR>
 autocmd FileType css vnoremap <buffer> <C-O> :call RangeCSSBeautify()<CR>
+
+" EasyAlign
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 if !empty($WS_ROOT)
   noremap <C-P> :CtrlP $WS_ROOT<CR>
