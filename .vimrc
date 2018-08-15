@@ -28,6 +28,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'pangloss/vim-javascript'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'junegunn/vim-easy-align'
+Plugin 'leafgarland/typescript-vim'
 " End plugins
 
 call vundle#end()
