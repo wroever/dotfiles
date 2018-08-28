@@ -238,7 +238,7 @@ autocmd FileType javascript let b:syntastic_javascript_eslint_args =
 let g:javascript_plugin_jsdoc = 1
 
 " Don't open new buffers in quickfix windows
-set switchbuf+=usetab,newtab
+set switchbuf+=usetab
 
 " Don't list quickfix windows in buffer list (and don't navigate to them on
 " bnext, bprev)
