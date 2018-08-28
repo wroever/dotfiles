@@ -237,6 +237,9 @@ autocmd FileType javascript let b:syntastic_javascript_eslint_args =
 " vim-javascript plugin
 let g:javascript_plugin_jsdoc = 1
 
+" Don't open new buffers in quickfix windows
+set switchbuf+=usetab,newtab
+
 " Don't list quickfix windows in buffer list (and don't navigate to them on
 " bnext, bprev)
 augroup qf
