@@ -19,6 +19,10 @@
     dump = cat-file -p
     aliases = config --get-regexp alias
     dl = diff -w HEAD^ HEAD
+    pp = push -u --force-with-lease
+
+[branch]
+    autosetuprebase = always
 
 [push]
     default = current
