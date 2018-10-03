@@ -21,6 +21,9 @@ set -o noclobber
 # Make bash check its window size after a process completes
 shopt -s checkwinsize
 
+# sudo autocomplete
+complete -cf sudo
+
 # Colors
 export GREP_OPTIONS='--color=auto'
 if command -v dircolors > /dev/null 2>&1;
