@@ -1,45 +1,17 @@
 " Largely borrowed from:
 " Doug Black: https://dougblack.io/words/a-good-vimrc.html
 " Mathias Bynens: https://github.com/mathiasbynens/dotfiles/
+" Joe Nelson: https://github.com/begriffs
 "
 "------------------------------------------------------------
 
-" Required Vundle settings
-set nocompatible
-filetype off " Re-enabled later...
-
-" Set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Let Vundle manage itself (required)
-Plugin 'VundleVim/Vundle.vim'
-
-" Begin plugins
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'pangloss/vim-javascript'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'leafgarland/typescript-vim'
-" End plugins
-
-call vundle#end()
-
-" protect against crash-during-write
+" Protect against crash-during-write
 set writebackup
-" but do not persist backup after successful write
+" ...but do not persist backup after successful write
 set nobackup
-" use rename-and-write-new method whenever safe
+" Use rename-and-write-new method whenever safe
 set backupcopy=auto
-" persist the undo tree for each file
+" Persist the undo tree for each file
 set undofile
 
 " Centralize backups, swapfiles and undo history
