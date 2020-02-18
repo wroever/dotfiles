@@ -33,11 +33,20 @@ Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()
 
+" protect against crash-during-write
+set writebackup
+" but do not persist backup after successful write
+set nobackup
+" use rename-and-write-new method whenever safe
+set backupcopy=auto
+" persist the undo tree for each file
+set undofile
+
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 if exists("&undodir")
-	set undodir=~/.vim/undo
+  set undodir=~/.vim/undo
 endif
 
 " Color scheme
@@ -138,6 +147,10 @@ set expandtab
 " shiftwidth controls how many columns text is indented with the reindent
 " operations
 set shiftwidth=2
+" Allows you to move the cursor anywhere in the window. If you enter characters
+" or insert a visual block, Vim will add whatever spaces are required to the
+" left of the inserted characters to keep them in place.
+" set virtualedit=all
 
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
@@ -192,7 +205,13 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_regexp = 1
 let g:ctrlp_max_files = 0
 
-if executable('ag')
+if executable('rg')
+  " Use rg over ag and grep
+  set grepprg=rg\ --vimgrep\ --color=never
+  let grepformat="%f:%l:%m"
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+elseif executable('ag')
   " Use ag over grep
   " Note that ag should ignore files listed in a .gitignore, these folders are
   " explicitly added for good measure
@@ -223,29 +242,30 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_javascript_eslint_exe = 'npm run eslint'
-" let g:syntastic_javascript_eslint_args = '-c ./.eslintrc.json'
-function! FindConfig(prefix, what, where)
-  let cfg = findfile(a:what, escape(a:where, ' ') . ';')
-  return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
-endfunction
-
-autocmd FileType javascript let b:syntastic_javascript_eslint_args =
-  \ get(g:, 'syntastic_javascript_eslint_args', '') .
-  \ FindConfig('-c', '.estlintrc.json', expand('<afile>:p:h', 1))
+let g:syntastic_javascript_eslint_exec = '[ -f $(npm bin)/eslint ] && $(npm bin)/eslint || eslint'
+let g:syntastic_javascript_eslint_args = '-c ./.eslintrc.json'
 
 " vim-javascript plugin
 let g:javascript_plugin_jsdoc = 1
+
+let g:typescript_compiler_binary = 'npx tsc'
+let g:typescript_compiler_options = ''
 
 " Don't open new buffers in quickfix windows
 set switchbuf+=usetab
 
 " Don't list quickfix windows in buffer list (and don't navigate to them on
-" bnext, bprev)
+" bnext, bprev), also disallow opening ordinary buffers in quickfix windows
 augroup qf
-    autocmd!
-    autocmd FileType qf set nobuflisted
+  autocmd!
+  autocmd FileType qf call SetQuickfixOptions()
 augroup END
+
+function SetQuickfixOptions()
+  set nobuflisted
+  nnoremap <buffer> <C-H> <C-H>
+  nnoremap <buffer> <C-L> <C-L>
+endfunction
 
 " EJS file-handling
 autocmd FileType ejs setlocal shiftwidth=4 tabstop=4 syntax=html
@@ -281,9 +301,6 @@ nnoremap <silent> <leader>f :call ToggleFolds()<CR>
 " nnoremap <C-H> <C-W><C-H>
 
 " Tabs
-" nnoremap <silent> <C-H> :tabp<CR>
-" nnoremap <silent> <C-L> :tabn<CR>
-" nnoremap <silent> <C-T> :tabe<CR>
 nnoremap <silent> <C-H> :bprevious<CR>
 nnoremap <silent> <C-L> :bnext<CR>
 nnoremap <silent> <C-T> :enew<CR>
@@ -313,11 +330,11 @@ if !empty($WS_ROOT)
 endif
 
 " Below per https://robots.thoughtbot.com/faster-grepping-in-vim
-" bind K to grep word under cursor
+" bind Ctrl-G to grep word under cursor
 nnoremap <C-G> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " bind \ (backward slash) to grep shortcut
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ag<SPACE>
+command -nargs=+ -complete=file -bar FindInFiles silent! grep! <args>|cwindow|redraw!
+nnoremap \ :FindInFiles<SPACE>
 " map <F4> :execute \" grep -srnw --binary-files=without-match --exclude-dir=.git --exclude-from=exclude.list . -e \" . expand("<cword>") . \" \" <bar> cwindow<CR>
 
 "------------------------------------------------------------
