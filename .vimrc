@@ -80,6 +80,8 @@ let g:vimsyn_folding = 'af' " augroups + functions
 " Better command-line completion - provides a graphical menu of matches you
 " can cycle through
 set wildmenu
+" Tab-complete files up to longest unambiguous prefix
+set wildmode=longest,list,full
 
 " Show partial commands in the last line of the screen
 set showcmd
