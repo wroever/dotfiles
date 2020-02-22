@@ -25,7 +25,6 @@ shopt -s checkwinsize
 complete -cf sudo
 
 # Colors
-export GREP_OPTIONS='--color=auto'
 if command -v dircolors > /dev/null 2>&1;
 then
     eval "$(dircolors -b ~/.dircolors)"
