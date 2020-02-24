@@ -27,14 +27,21 @@ complete -cf sudo
 # Colors
 if command -v dircolors > /dev/null 2>&1;
 then
-    eval "$(dircolors -b ~/.dircolors)"
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 elif command -v gdircolors > /dev/null 2>&1;
 then
-    eval "$(gdircolors -b ~/.dircolors)"
+    test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
 else
     export CLICOLOR=YES
     export LSCOLORS='dxgxcxdxcxegedabagacad'
 fi
+
+# Colors
+
 # Less Colors for Man Pages
 # Per: https://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/
 export LESS_TERMCAP_mb=$'\e[01;31m'       # Begin blinking
@@ -44,6 +51,9 @@ export LESS_TERMCAP_se=$'\e[0m'           # End standout-mode
 export LESS_TERMCAP_so=$'\e[38;5;246m'    # Begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\e[0m'           # End underline
 export LESS_TERMCAP_us=$'\e[04;38;5;146m' # Begin underline
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # Load the shell dotfiles, and then some:
 # * ~/.extras    : private or host-specific initialization
