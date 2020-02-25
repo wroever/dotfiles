@@ -211,18 +211,28 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
+" Had been seeing some strange behavior with the below setting at 1 (consistent
+" with the recommended settings), where Syntastic would overwrite the location
+" list with an empty list after some time, blowing away any/all useful output.
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_error_symbol = "✗✗"
+let g:syntastic_warning_symbol = "⚠⚠"
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = '[ -f $(npm bin)/eslint ] && $(npm bin)/eslint || eslint'
+" Per https://github.com/vim-syntastic/syntastic/issues/1692, the below command
+" will not work unless eslint is installed globally (else Syntastic does not
+" consider eslint to be an enabled checker) OR syntastic_javascript_eslint_exec
+" is pointed to some arbitrary valid binary.
+let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+let g:syntastic_javascript_eslint_exec = '/bin/ls'
 let g:syntastic_javascript_eslint_args = '-c ./.eslintrc.json'
 
 " vim-javascript plugin
 let g:javascript_plugin_jsdoc = 1
 
-let g:typescript_compiler_binary = 'npx tsc'
+let g:typescript_compiler_binary = '$(npm bin)/tsc'
 let g:typescript_compiler_options = ''
 
 " Don't open new buffers in quickfix windows
