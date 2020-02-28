@@ -220,6 +220,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "✗✗"
 let g:syntastic_warning_symbol = "⚠⚠"
+
 let g:syntastic_javascript_checkers = ['eslint']
 " Per https://github.com/vim-syntastic/syntastic/issues/1692, the below command
 " will not work unless eslint is installed globally (else Syntastic does not
@@ -228,6 +229,12 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 let g:syntastic_javascript_eslint_exec = '/bin/ls'
 let g:syntastic_javascript_eslint_args = '-c ./.eslintrc.json'
+
+" Typescript / Tsuquoyomi
+let g:tsuquyomi_disable_quickfix = 1
+" Tsuquoyomi overrides the default key mapping for C-6 (rude :P)
+let g:tsuquyomi_disable_default_mappings = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 " vim-javascript plugin
 let g:javascript_plugin_jsdoc = 1
