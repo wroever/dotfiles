@@ -22,7 +22,7 @@ if exists("&undodir")
 endif
 
 " Color scheme
-colorscheme badwolf
+colorscheme vice
 
 " Display line numbers on the left
 set number
@@ -207,6 +207,12 @@ endif
 " editorconfig recommended
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+" YCM settings
+" This ensures compatibility with Syntastic - in particular, when this feature
+" is enabled (as it is by default), YCM seems to periodically hijack the
+" location list window, causing Syntastic to lose control of it.
+let g:ycm_always_populate_location_list = 0
+
 " Syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -214,7 +220,7 @@ set statusline+=%*
 " Had been seeing some strange behavior with the below setting at 1 (consistent
 " with the recommended settings), where Syntastic would overwrite the location
 " list with an empty list after some time, blowing away any/all useful output.
-let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
@@ -257,6 +263,9 @@ function SetQuickfixOptions()
   nnoremap <buffer> <C-H> <C-H>
   nnoremap <buffer> <C-L> <C-L>
 endfunction
+
+" Close quickfix windows on :bd in main nbuffer
+cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
 " EJS file-handling
 autocmd FileType ejs setlocal shiftwidth=4 tabstop=4 syntax=html
