@@ -1,4 +1,8 @@
 # preview csv files. source: http://stackoverflow.com/questions/1875305/command-line-csv-viewer
-function csvpreview(){
-      sed 's/,,/, ,/g;s/,,/, ,/g' "$@" | column -s, -t | less -#2 -N -S
+function csvpreview() {
+  sed 's/,,/, ,/g;s/,,/, ,/g' "$@" | column -s, -t | less -#2 -N -S
+}
+
+function blackhole() {
+  echo "127.0.0.1 $1" | sudo tee -a /etc/hosts
 }

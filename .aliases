@@ -1,8 +1,10 @@
 alias hosts='sudo $EDITOR /etc/hosts'
-alias v='vim'
-alias gno='git status -uno'
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+
+alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+
 alias epochms="date +%s%N | cut -b1-13"
 alias isodate="date -u +"%Y-%m-%dT%H:%M:%SZ""
 
-alias vundle-install='vim +PluginInstall +qall'
+alias v='vim'
+
+alias gno='git status -uno'
