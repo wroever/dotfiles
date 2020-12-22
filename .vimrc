@@ -86,8 +86,7 @@ set wildmode=longest,list,full
 " Show partial commands in the last line of the screen
 set showcmd
 
-" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
-" mapping of <C-L> below)
+" Highlight searches
 set hlsearch
 
 " Use case insensitive search, except when using capital letters
@@ -207,40 +206,106 @@ endif
 " editorconfig recommended
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+" COC settings
+let g:coc_global_extensions = [
+    \ 'coc-tsserver',
+    \ 'coc-eslint',
+    \ 'coc-prettier',
+    \ 'coc-json',
+    \ ]
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience for coc.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+autocmd FileType typescript,javascript set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Use K to show documentation in preview window.
+nnoremap <silent> <C-K> :call <SID>show_documentation()<CR>
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+augroup jsformat
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,javascript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
 " YCM settings
 " This ensures compatibility with Syntastic - in particular, when this feature
 " is enabled (as it is by default), YCM seems to periodically hijack the
 " location list window, causing Syntastic to lose control of it.
-let g:ycm_always_populate_location_list = 0
+" let g:ycm_always_populate_location_list = 0
 
 " Syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 " Had been seeing some strange behavior with the below setting at 1 (consistent
 " with the recommended settings), where Syntastic would overwrite the location
 " list with an empty list after some time, blowing away any/all useful output.
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = "✗✗"
-let g:syntastic_warning_symbol = "⚠⚠"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_error_symbol = "✗✗"
+" let g:syntastic_warning_symbol = "⚠⚠"
 
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['eslint']
 " Per https://github.com/vim-syntastic/syntastic/issues/1692, the below command
 " will not work unless eslint is installed globally (else Syntastic does not
 " consider eslint to be an enabled checker) OR syntastic_javascript_eslint_exec
 " is pointed to some arbitrary valid binary.
-let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
-let g:syntastic_javascript_eslint_exec = '/bin/ls'
-let g:syntastic_javascript_eslint_args = '-c ./.eslintrc.json'
+" let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+" let g:syntastic_javascript_eslint_exec = '/bin/ls'
+" let g:syntastic_javascript_eslint_args = '-c ./.eslintrc.json'
 
 " Typescript / Tsuquoyomi
-let g:tsuquyomi_disable_quickfix = 1
+" let g:tsuquyomi_disable_quickfix = 1
 " Tsuquoyomi overrides the default key mapping for C-6 (rude :P)
-let g:tsuquyomi_disable_default_mappings = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi']
+" let g:tsuquyomi_disable_default_mappings = 1
+" let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 " vim-javascript plugin
 let g:javascript_plugin_jsdoc = 1
@@ -260,12 +325,12 @@ augroup END
 
 function SetQuickfixOptions()
   set nobuflisted
-  nnoremap <buffer> <C-H> <C-H>
-  nnoremap <buffer> <C-L> <C-L>
+  nnoremap <buffer> <C-H> <Nop>
+  nnoremap <buffer> <C-L> <Nop>
 endfunction
 
 " Close quickfix windows on :bd in main nbuffer
-cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
+" cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'cclose\|bdelete' : 'bd')<CR>
 
 " EJS file-handling
 autocmd FileType ejs setlocal shiftwidth=4 tabstop=4 syntax=html
@@ -305,14 +370,28 @@ nnoremap <silent> <C-H> :bprevious<CR>
 nnoremap <silent> <C-L> :bnext<CR>
 nnoremap <silent> <C-T> :enew<CR>
 
-nnoremap <silent> <leader>h :bprevious<CR>
-nnoremap <silent> <leader>l :bnext<CR>
-nnoremap <silent> <leader>t :enew<CR>
+" Location lists
+function! s:BufferCount() abort
+    return len(filter(range(1, bufnr('$')), 'bufwinnr(v:val) != -1'))
+endfunction
 
-" Prettify JSON
-nnoremap <silent> <leader>P :%!python -m json.tool<CR>
+function! s:LListToggle() abort
+    let buffer_count_before = s:BufferCount()
+    " Location list can't be closed if there's cursor in it, so we need
+    " to call lclose twice to move cursor to the main pane
+    silent! lclose
+    silent! lclose
+
+    if s:BufferCount() == buffer_count_before
+        execute "silent! lopen"
+    endif
+endfunction
+
+command! LToggle call s:LListToggle()
+nnoremap <silent> <leader>l :LToggle<CR>
 
 " Beautify JS, CSS, etc. (vim-jsbeautify)
+autocmd FileType typescript vnoremap <buffer> <C-O> :call RangeJsBeautify()<CR>
 autocmd FileType javascript vnoremap <buffer> <C-O> :call RangeJsBeautify()<CR>
 autocmd FileType json vnoremap <buffer> <C-O> :call RangeJsonBeautify()<CR>
 autocmd FileType jsx vnoremap <buffer> <C-O> :call RangeJsxBeautify()<CR>
@@ -325,9 +404,16 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" CtrlP
 if !empty($WS_ROOT)
   noremap <C-P> :CtrlP $WS_ROOT<CR>
 endif
+
+" Commentary
+xmap <C-_> <Plug>Commentary
+nmap <C-_> <Plug>Commentary
+omap <C-_> <Plug>Commentary
+nmap <C-_> <Plug>CommentaryLine
 
 " Below per https://robots.thoughtbot.com/faster-grepping-in-vim
 " bind Ctrl-G to grep word under cursor
@@ -335,7 +421,12 @@ nnoremap <C-G> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar FindInFiles silent! grep! <args>|cwindow|redraw!
 nnoremap \ :FindInFiles<SPACE>
-" map <F4> :execute \" grep -srnw --binary-files=without-match --exclude-dir=.git --exclude-from=exclude.list . -e \" . expand("<cword>") . \" \" <bar> cwindow<CR>
+
+" Force usage of HJKL
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
 "------------------------------------------------------------
 " Host-specific configs
