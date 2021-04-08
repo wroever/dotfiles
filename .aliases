@@ -1,6 +1,7 @@
 alias hosts='sudo $EDITOR /etc/hosts'
 
 alias v='vim'
+alias d='docker'
 alias gno='git status -uno'
 
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
