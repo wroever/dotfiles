@@ -3,6 +3,7 @@
 
 [core]
     editor = vim
+    excludesfile = ~/.gitignore_global
 
 [include]
     path = ~/.gitconfig.local
