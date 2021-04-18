@@ -6,3 +6,16 @@ function csvpreview() {
 function blackhole() {
   echo "127.0.0.1 $1" | sudo tee -a /etc/hosts
 }
+
+# Create a coc.nvim .vim project directory
+function mkproj() {
+  local dir="$1"
+  if [[ "${dir}" != /* ]]; then
+    dir="${PWD}/${dir}"
+  fi
+  if [ -d "${dir}" ]; then
+    mkdir -p "${dir}/.vim"
+  else
+    echo "Directory '${dir}' does not exist"
+  fi
+}
