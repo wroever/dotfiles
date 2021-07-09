@@ -431,6 +431,20 @@ noremap <Right> <Nop>
 " Show Coc diagnostics
 nnoremap <silent> <leader>d :CocDiagnostics<CR>
 
+function! ToggleMarkup() abort
+  let l:padding = wincol() - virtcol('.')
+  if l:padding == 0
+    set list
+    set signcolumn=yes
+    set number
+  else
+    set nolist
+    set signcolumn=no
+    set nonumber
+  endif
+endfunction
+nnoremap <silent> <leader>m :call ToggleMarkup()<CR>
+
 "------------------------------------------------------------
 " Host-specific configs
 "
