@@ -436,10 +436,12 @@ function! ToggleMarkup() abort
   if l:padding == 0
     set list
     set signcolumn=yes
+    set foldcolumn=12
     set number
   else
     set nolist
     set signcolumn=no
+    set foldcolumn=0
     set nonumber
   endif
 endfunction
