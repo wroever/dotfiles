@@ -22,7 +22,7 @@ if exists("&undodir")
 endif
 
 " Color scheme
-colorscheme vice
+colorscheme nord
 
 " Display line numbers on the left
 set number
@@ -156,7 +156,7 @@ endfunction
 map <silent> <C-E> :call ToggleVExplorer()<CR>
 
 " Airline
-let g:airline_theme='minimalist'
+let g:airline_theme='nord'
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -427,6 +427,9 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+
+" Show Coc diagnostics
+nnoremap <silent> <leader>d :CocDiagnostics<CR>
 
 "------------------------------------------------------------
 " Host-specific configs
