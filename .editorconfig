@@ -8,6 +8,9 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+[{*.ts,*.js}]
+indent_size = 2
+quote_type = single
+
 [{*.yml,*.yaml,*.json}]
-indent_style = space
 indent_size = 2
