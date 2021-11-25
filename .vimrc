@@ -22,7 +22,8 @@ if exists("&undodir")
 endif
 
 " Color scheme
-colorscheme nord
+colorscheme papercolor
+set background=light " Required for papercolor nvim compatibility
 
 " Display line numbers on the left
 set number
@@ -156,7 +157,7 @@ endfunction
 map <silent> <C-E> :call ToggleVExplorer()<CR>
 
 " Airline
-let g:airline_theme='nord'
+let g:airline_theme='papercolor'
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}

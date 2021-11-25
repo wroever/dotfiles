@@ -19,3 +19,7 @@ function mkproj() {
     echo "Directory '${dir}' does not exist"
   fi
 }
+
+function epoch_to_iso() {
+  node -p "new Date($1)"
+}
