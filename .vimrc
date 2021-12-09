@@ -447,6 +447,11 @@ function! ToggleMarkup() abort
 endfunction
 nnoremap <silent> <leader>m :call ToggleMarkup()<CR>
 
+" Fugitive shortcuts
+nnoremap <silent> <leader>ga :Git add %:p<CR>
+nnoremap <silent> <leader>gb :Git blame<CR>
+nnoremap <silent> <leader>gl :Git log -- %<CR>
+
 "------------------------------------------------------------
 " Host-specific configs
 "
