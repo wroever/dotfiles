@@ -87,3 +87,6 @@ export NVM_DIR="$HOME/.nvm"
 export WORKON_HOME=~/.virtualenvs
 VIRTUALENVWRAPPER_INIT=/usr/local/bin/virtualenvwrapper.sh
 [ -s "$VIRTUALENVWRAPPER_INIT" ] && source $VIRTUALENVWRAPPER_INIT
+
+# rbenv
+eval "$(rbenv init - bash)"
