@@ -75,6 +75,9 @@ set splitbelow
 set splitright
 set fillchars+=vert:\│
 
+" Open diffs in vertial splits
+set diffopt+=vertical
+
 " Folds
 let g:vimsyn_folding = 'af' " augroups + functions
 
