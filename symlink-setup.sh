@@ -3,7 +3,7 @@
 # Symlinks all the dotfiles (and .vim/) to ~/
 # Also symlinks ~/bin for easy updating
 
-# Largely (entirely) borrowed from paulirish's script here:
+# Largely borrowed from paulirish's script here:
 # https://raw.githubusercontent.com/paulirish/dotfiles/master/symlink-setup.sh
 # ...which in turn is based on:
 # https://raw.githubusercontent.com/alrra/dotfiles/master/os/create_symbolic_links.sh

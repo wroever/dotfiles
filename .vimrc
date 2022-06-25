@@ -22,8 +22,13 @@ if exists("&undodir")
 endif
 
 " Color scheme
-colorscheme papercolor
+colorscheme nord
 set background=light " Required for papercolor nvim compatibility
+
+" Required for nord
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 " Display line numbers on the left
 set number
@@ -160,7 +165,7 @@ endfunction
 map <silent> <C-E> :call ToggleVExplorer()<CR>
 
 " Airline
-let g:airline_theme='papercolor'
+let g:airline_theme='nord'
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -213,9 +218,11 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " COC settings
 let g:coc_global_extensions = [
     \ 'coc-tsserver',
+    \ 'coc-solargraph',
     \ 'coc-eslint',
     \ 'coc-prettier',
     \ 'coc-json',
+    \ 'coc-yaml',
     \ ]
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -275,41 +282,6 @@ augroup jsformat
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
-
-" YCM settings
-" This ensures compatibility with Syntastic - in particular, when this feature
-" is enabled (as it is by default), YCM seems to periodically hijack the
-" location list window, causing Syntastic to lose control of it.
-" let g:ycm_always_populate_location_list = 0
-
-" Syntastic settings
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" Had been seeing some strange behavior with the below setting at 1 (consistent
-" with the recommended settings), where Syntastic would overwrite the location
-" list with an empty list after some time, blowing away any/all useful output.
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_error_symbol = "✗✗"
-" let g:syntastic_warning_symbol = "⚠⚠"
-
-" let g:syntastic_javascript_checkers = ['eslint']
-" Per https://github.com/vim-syntastic/syntastic/issues/1692, the below command
-" will not work unless eslint is installed globally (else Syntastic does not
-" consider eslint to be an enabled checker) OR syntastic_javascript_eslint_exec
-" is pointed to some arbitrary valid binary.
-" let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
-" let g:syntastic_javascript_eslint_exec = '/bin/ls'
-" let g:syntastic_javascript_eslint_args = '-c ./.eslintrc.json'
-
-" Typescript / Tsuquoyomi
-" let g:tsuquyomi_disable_quickfix = 1
-" Tsuquoyomi overrides the default key mapping for C-6 (rude :P)
-" let g:tsuquyomi_disable_default_mappings = 1
-" let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 " vim-javascript plugin
 let g:javascript_plugin_jsdoc = 1
