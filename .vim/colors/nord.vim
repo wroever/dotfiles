@@ -120,7 +120,7 @@ if exists("g:nord_comment_brightness")
   call s:logWarning('Variable g:nord_comment_brightness has been deprecated and will be removed in version 1.0.0!' .
                    \' The comment color brightness has been increased by 10% by default.' .
                    \' Please see https://github.com/arcticicestudio/nord-vim/issues/145 for more details.')
-  let g:nord_comment_brightness = 20
+  let g:nord_comment_brightness = 40
 endif
 
 if !exists("g:nord_uniform_diff_background")
