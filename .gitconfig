@@ -15,7 +15,8 @@
     co = checkout
     st = status
     br = branch
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    ln = log --pretty=format:\"%C(auto)%h%C(reset) | %C(blue)%ad%C(reset) | %C(green)%an%C(reset) | %s%C(auto)%d%C(reset)\"
+    hist = log --pretty=format:\"%C(auto)%h%C(reset) %ad | %s%C(auto)%d%C(reset) [%an]\" --graph --date=short
     type = cat-file -t
     dump = cat-file -p
     aliases = config --get-regexp alias

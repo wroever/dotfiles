@@ -1,6 +1,7 @@
 alias hosts='sudo $EDITOR /etc/hosts'
 
 alias v='vim'
+alias f='rg --files | rg'
 alias d='docker'
 alias gno='git status -uno'
 

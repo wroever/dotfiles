@@ -193,17 +193,6 @@ if executable('rg')
   let grepformat="%f:%l:%m"
   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
-elseif executable('ag')
-  " Use ag over grep
-  " Note that ag should ignore files listed in a .gitignore, these folders are
-  " explicitly added for good measure
-  set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ build\ --ignore\ node_modules
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --ignore build --ignore node_modules'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
 else
   set wildignore+=*/tmp/*,*.so,*.swp,*.zip
   let g:ctrlp_custom_ignore = {
@@ -373,6 +362,11 @@ autocmd FileType json vnoremap <buffer> <C-O> :call RangeJsonBeautify()<CR>
 autocmd FileType jsx vnoremap <buffer> <C-O> :call RangeJsxBeautify()<CR>
 autocmd FileType html vnoremap <buffer> <C-O> :call RangeHtmlBeautify()<CR>
 autocmd FileType css vnoremap <buffer> <C-O> :call RangeCSSBeautify()<CR>
+" command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+" vnoremap <leader>f <Plug>(coc-format-selected)
+" nnoremap <leader>f <Plug>(coc-format-selected)
+autocmd FileType typescript,javascript,jsx,html,css setl formatexpr=CocAction('formatSelected')
+
 
 " EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -391,12 +385,11 @@ nmap <C-_> <Plug>Commentary
 omap <C-_> <Plug>Commentary
 nmap <C-_> <Plug>CommentaryLine
 
-" Below per https://robots.thoughtbot.com/faster-grepping-in-vim
-" bind Ctrl-G to grep word under cursor
-nnoremap <C-G> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-" bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar FindInFiles silent! grep! <args>|cwindow|redraw!
+" bind \ (backward slash) to grep shortcut
 nnoremap \ :FindInFiles<SPACE>
+" bind Ctrl-G to grep word under cursor
+nnoremap <C-G> :FindInFiles <cword><CR>
 
 " Force usage of HJKL
 noremap <Up> <Nop>
