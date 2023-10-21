@@ -75,6 +75,9 @@ set hidden
 " set confirm
 " set autowriteall
 
+" Mouse
+set mouse=
+
 " Splits
 set splitbelow
 set splitright
