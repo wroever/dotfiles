@@ -36,6 +36,10 @@ bindkey "^[[B" history-beginning-search-forward
 # Kill text before the cursor, like one does in bash
 bindkey \^U backward-kill-line
 
+# Jump forward/backward one word
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+
 # Fix issue where (Neo)vim changes terminal cursor type
 fix_cursor() {
    echo -ne '\e[5 q'
