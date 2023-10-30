@@ -1,9 +1,3 @@
-# Colors
-export CLICOLOR=YES
-export LSCOLORS='dxgxcxdxcxegedabagacad'
-
-export EDITOR=vim
-
 # History
 HISTSIZE=10000
 setopt EXTENDED_HISTORY   # Write the history file in the ":start:elapsed;command" format.
@@ -28,6 +22,10 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # Load autocompletion
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
+
+# Ensure key bindings work in tmux:
+# https://unix.stackexchange.com/questions/746605/bindkey-commands-run-in-zshrc-seem-ignored-when-in-tmux
+bindkey -e
 
 # Use the text that has already been typed as the prefix for history search
 bindkey "^[[A" history-beginning-search-backward

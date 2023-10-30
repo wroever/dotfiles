@@ -1,7 +1,5 @@
 alias v='vim'
 alias f='rg --files | rg'
-alias d='docker'
-alias mux='tmuxinator'
 alias gno='git status -uno'
 
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"

@@ -4,5 +4,7 @@
 .config/nvim/*
 !.config/nvim/init.{lua,vim}
 !.config/nvim/colors
+!.config/yabai
+!.config/skhd
 
 !.config/starship.toml
