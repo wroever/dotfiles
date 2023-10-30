@@ -2,7 +2,6 @@
     auto = 0
 
 [core]
-    editor = vim
     excludesfile = ~/.gitignore_global
 
 [include]
