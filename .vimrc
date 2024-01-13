@@ -207,79 +207,11 @@ endif
 " editorconfig recommended
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" COC settings
-let g:coc_global_extensions = [
-    \ 'coc-tsserver',
-    \ 'coc-solargraph',
-    \ 'coc-eslint',
-    \ 'coc-prettier',
-    \ 'coc-json',
-    \ 'coc-yaml',
-    \ ]
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience for coc.
+" Set shorter updatetime
 set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-autocmd FileType typescript,javascript set signcolumn=yes
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Use K to show documentation in preview window.
-nnoremap <silent> <C-K> :call <SID>show_documentation()<CR>
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-augroup jsformat
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,javascript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" vim-javascript plugin
-let g:javascript_plugin_jsdoc = 1
-
-let g:typescript_compiler_binary = '$(npm bin)/tsc'
-let g:typescript_compiler_options = ''
 
 " Don't open new buffers in quickfix windows
 set switchbuf+=usetab
@@ -358,19 +290,6 @@ endfunction
 command! LToggle call s:LListToggle()
 nnoremap <silent> <leader>l :LToggle<CR>
 
-" Beautify JS, CSS, etc. (vim-jsbeautify)
-autocmd FileType typescript vnoremap <buffer> <C-O> :call RangeJsBeautify()<CR>
-autocmd FileType javascript vnoremap <buffer> <C-O> :call RangeJsBeautify()<CR>
-autocmd FileType json vnoremap <buffer> <C-O> :call RangeJsonBeautify()<CR>
-autocmd FileType jsx vnoremap <buffer> <C-O> :call RangeJsxBeautify()<CR>
-autocmd FileType html vnoremap <buffer> <C-O> :call RangeHtmlBeautify()<CR>
-autocmd FileType css vnoremap <buffer> <C-O> :call RangeCSSBeautify()<CR>
-" command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
-" vnoremap <leader>f <Plug>(coc-format-selected)
-" nnoremap <leader>f <Plug>(coc-format-selected)
-autocmd FileType typescript,javascript,jsx,html,css setl formatexpr=CocAction('formatSelected')
-
-
 " EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -399,9 +318,6 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
-
-" Show Coc diagnostics
-nnoremap <silent> <leader>d :CocDiagnostics<CR>
 
 function! ToggleMarkup() abort
   let l:padding = wincol() - virtcol('.')
