@@ -12,3 +12,6 @@ yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Messages$" manage=off
 yabai -m rule --add app="^App Store$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^1Password 7$" manage=off
+yabai -m rule --add app="^Music$" manage=off
+yabai -m rule --add app="^Docker Desktop$" manage=off
