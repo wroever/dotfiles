@@ -22,13 +22,13 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
 cask "1password"
-cask "alacritty"
 cask "istat-menus"
 cask "monodraw"
+cask "proxyman"
+cask "wezterm"
 
-tap "koekeishiya/formulae"
-brew "koekeishiya/formulae/skhd"
-brew "koekeishiya/formulae/yabai"
+tap "nikitabobko/tap"
+cask "aerospace"
 
 tap "homebrew/cask-fonts"
 cask "font-roboto-mono-nerd-font"
