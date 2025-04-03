@@ -25,7 +25,7 @@ cask "1password"
 cask "istat-menus"
 cask "monodraw"
 cask "proxyman"
-cask "wezterm"
+cask "ghostty"
 
 tap "nikitabobko/tap"
 cask "aerospace"
