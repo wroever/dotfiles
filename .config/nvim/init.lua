@@ -3,7 +3,7 @@
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -687,6 +687,8 @@ require("lazy").setup({
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
+
+  "github/copilot.vim",
 
   {
     "yetone/avante.nvim",
