@@ -35,7 +35,6 @@ cask "aerospace"
 
 tap "homebrew/cask-fonts"
 cask "font-roboto-mono-nerd-font"
-cask "font-jetbrains-mono-nerd-font"
 
 mas "Bear", id: 1091189122
 mas "Tailscale", id: 1475387142
