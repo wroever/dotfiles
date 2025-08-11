@@ -374,6 +374,7 @@ mouse-scroll-multiplier = 3
 # keybind = super+physical:two=goto_tab:2
 # keybind = super+physical:six=goto_tab:6
 # keybind = super+v=paste_from_clipboard
+keybind = shift+enter=text:\n
 window-padding-x = 20
 window-padding-y = 20
 # window-padding-balance = false

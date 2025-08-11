@@ -384,6 +384,7 @@ require("lazy").setup({
         rust_analyzer = {},
         ts_ls = {},
         ruby_lsp = {},
+        ruff = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -413,6 +414,7 @@ require("lazy").setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
+        "copilot-language-server",
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
