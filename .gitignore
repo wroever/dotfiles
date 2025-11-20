@@ -2,10 +2,10 @@
 
 !.config/nvim
 .config/nvim/*
-!.config/nvim/init.{lua,vim}
 !.config/nvim/colors
+!.config/nvim/init.{lua,vim}
+!.config/nvim/lazy-lock.json
 !.config/aerospace
 !.config/ghostty
-
-!.config/starship.toml
 !.config/mise
+!.config/starship.toml
