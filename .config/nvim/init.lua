@@ -84,8 +84,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Go to previous diagnostic message" })
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -141,6 +145,9 @@ require("lazy").setup({
   -- Detect tabstop and shiftwidth automatically
   "tpope/vim-sleuth",
 
+  -- Detect tabstop and shiftwidth automatically
+  "tpope/vim-surround",
+
   -- "gc" to comment visual regions/lines
   { "numToStr/Comment.nvim", opts = {} },
 
@@ -168,7 +175,7 @@ require("lazy").setup({
   { -- Fuzzy Finder (files, lsp, etc)
     "nvim-telescope/telescope.nvim",
     event = "VimEnter",
-    branch = "0.1.x",
+    version = "~0.1.9", -- TODO: Remove once updated to 0.1.9 in https://github.com/folke/lazy.nvim/blob/main/lua/lazy/community/_generated.lua
     dependencies = {
       "nvim-lua/plenary.nvim",
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -329,7 +336,7 @@ require("lazy").setup({
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
               buffer = event.buf,
@@ -356,7 +363,7 @@ require("lazy").setup({
           -- code, if the language server you are using supports them
           --
           -- This may be unwanted, since they displace some of your code
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map("<leader>th", function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, "[T]oggle Inlay [H]ints")
@@ -381,6 +388,7 @@ require("lazy").setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+        copilot = {},
         rust_analyzer = {},
         ts_ls = {},
         ruby_lsp = {},
