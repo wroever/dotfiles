@@ -47,7 +47,7 @@ fix_cursor() {
 }
 precmd_functions+=(fix_cursor)
 
-for file in ~/.{aliases,extras}; do
+for file in ~/.{aliases,extras,functions}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
