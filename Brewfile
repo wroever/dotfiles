@@ -1,6 +1,3 @@
-tap "homebrew/bundle"
-tap "homebrew/services"
-
 brew "bat"
 brew "coreutils" # For dircolors (used by fd et al)
 brew "curl"
@@ -31,7 +28,6 @@ cask "ghostty"
 tap "nikitabobko/tap"
 cask "aerospace"
 
-tap "homebrew/cask-fonts"
 cask "font-roboto-mono-nerd-font"
 
 mas "Bear", id: 1091189122
