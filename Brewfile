@@ -6,6 +6,7 @@ brew "gh"
 brew "git-delta"
 brew "hyperfine"
 brew "jq"
+brew "libyaml" # Required for Ruby 3.x
 brew "mas"
 brew "mise"
 brew "neofetch"
