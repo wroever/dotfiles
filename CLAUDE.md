@@ -8,13 +8,24 @@ This is a personal dotfiles repository for managing macOS development environmen
 
 ## Setup & Installation
 
-### Initial Setup
+### Automated Setup (Recommended)
+Run `./bootstrap.sh` for complete setup on a new machine. The script will:
+- Install Homebrew (if not present)
+- Install all Homebrew packages from Brewfile
+- Create symlinks for all dotfiles
+- Set zsh as default shell
+- Install mise tools (Ruby, Node, Python)
+- Configure zsh plugins and Starship prompt
+
+### Manual Setup
+
+#### Symlinks
 Run `./symlink-setup.sh` to create symlinks for all dotfiles in the home directory. The script will:
 - Symlink all dotfiles (`.bashrc`, `.zshrc`, `.vimrc`, etc.) to `~/`
 - Symlink `.vim`, `bin`, and `.config` directories to `~/`
 - Prompt before overwriting existing files
 
-### Homebrew Dependencies
+#### Homebrew Dependencies
 Install all packages with: `brew bundle`
 
 Key packages include:
@@ -78,6 +89,7 @@ Key packages include:
 │   │   └── colors/     # Color schemes
 │   ├── starship.toml   # Starship prompt config
 ├── Brewfile            # Homebrew package definitions
+├── bootstrap.sh        # Complete setup automation script
 ├── symlink-setup.sh    # Symlink installation script
 └── README.md           # Basic setup instructions
 ```
