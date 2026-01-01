@@ -112,7 +112,4 @@ Key packages include:
 
 ## Theme & Styling
 
-All tools use the **Nord** color scheme for consistency:
-- Vim/Neovim: `nord.vim`
-- Starship: Custom Nord colors (`fg:#7b88a1`)
-- Terminal: Configured in Ghostty settings
+All tools use the **Rose Pine** color scheme for consistency.

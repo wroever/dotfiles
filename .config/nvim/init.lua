@@ -62,16 +62,6 @@ vim.keymap.set("n", "<C-H>", ":bprev<CR>", { silent = true })
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = "menuone,noselect"
 
--- Nord colors
-vim.cmd([[colorscheme nord]])
--- vim.g.nord_italic = false
--- vim.g.nord_contrast = true
--- vim.g.nord_borders = false
--- vim.g.nord_disable_background = false
--- vim.g.nord_italic = false
--- vim.g.nord_uniform_diff_background = true
--- vim.g.nord_bold = false
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
@@ -110,13 +100,12 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require("lazy").setup({
-  -- NOTE: First, some plugins that don't require any configuration
   {
-    "shaunsingh/nord.nvim",
-    -- priority = 1000,
+    "rose-pine/neovim",
+    name = "rose-pine",
     config = function()
-      -- vim.g.nord_contrast = true
-      -- vim.api.nvim_command("colorscheme nord")
+      vim.cmd("colorscheme rose-pine")
+      require('rose-pine').setup({disable_italics = true})
     end,
   },
 
@@ -679,18 +668,14 @@ require("lazy").setup({
   {
     "akinsho/bufferline.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
-    opts = function(_, opts)
-      local highlights = require("nord").bufferline.highlights({
-        italic = false,
-        bold = true,
-        fill = "#181c24",
-      })
-      opts.highlights = highlights
-      opts.options = {
+    event = 'ColorScheme',
+    opts = {
+      options = {
         show_close_icon = false,
         show_buffer_close_icons = false,
-      }
-    end,
+        themeable = true
+      },
+    },
   },
 
   {
@@ -699,7 +684,6 @@ require("lazy").setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
-        theme = "nord",
         component_separators = "|",
         section_separators = "",
       },
