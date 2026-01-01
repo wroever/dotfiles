@@ -20,6 +20,7 @@
     dump = cat-file -p
     aliases = config --get-regexp alias
     dl = diff -w HEAD^ HEAD
+    dc = diff --cached
     pp = push -u --force-with-lease
 
 [branch]
@@ -31,3 +32,6 @@
 
 [stash]
     showPatch = true
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/
