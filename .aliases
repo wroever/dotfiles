@@ -1,4 +1,4 @@
-alias v='vim'
+alias v="${EDITOR}"
 alias gno='git status -uno'
 
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"

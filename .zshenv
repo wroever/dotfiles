@@ -1,6 +1,11 @@
 export CLICOLOR=YES
 export LSCOLORS=dxgxcxdxcxegedabagacad
-export EDITOR=vim
+
+if command -v nvim &> /dev/null; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
 
 if type dircolors >/dev/null; then
   eval $(dircolors -b ~/.dir_colors)
