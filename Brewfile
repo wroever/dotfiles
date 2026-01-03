@@ -17,7 +17,6 @@ brew "tmux"
 brew "tree"
 brew "uv"
 brew "watch"
-brew "xsv"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
