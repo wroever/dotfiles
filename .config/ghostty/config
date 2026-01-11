@@ -439,4 +439,4 @@ macos-titlebar-style = hidden
 # bold-is-bright = false
 # term = xterm-ghostty
 # enquiry-response =
-# auto-update = check
+auto-update = off
