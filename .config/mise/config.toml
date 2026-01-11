@@ -3,6 +3,6 @@ idiomatic_version_file_enable_tools = ["go", "node", "python", "ruby"]
 
 [tools]
 go = "1"
-node = "25"
+node = "lts"
 python = "3"
 ruby = "3"
