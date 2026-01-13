@@ -11,3 +11,9 @@ setopt HIST_FIND_NO_DUPS  # Don't display duplicates when searching history.
 # Initialize Homebrew environment
 HOMEBREW_PREFIX="/opt/homebrew"
 command -v ${HOMEBREW_PREFIX}/bin/brew &>/dev/null && eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+
+if command -v nvim &> /dev/null; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
