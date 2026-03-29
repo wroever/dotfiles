@@ -91,8 +91,14 @@ print_header "Setting up mise tools..."
 if command -v mise &> /dev/null; then
     # Activate mise for this script
     eval "$(mise activate bash)"
+    MISE_CONFIG_FILE="$DOTFILES_DIR/.config/mise/config.toml"
 
     if ask_confirmation "Install mise tools (Ruby, Node, Python)?"; then
+        if [[ -f "$MISE_CONFIG_FILE" ]]; then
+            print_header "Trusting mise config..."
+            mise trust "$MISE_CONFIG_FILE"
+        fi
+
         mise install
         print_success "mise tools installed"
 
@@ -120,7 +126,7 @@ print_header "Bootstrap complete!"
 echo -e "
 ${GREEN}✓${NC} Setup completed successfully!
 
-Restart your terminal or run: ${BLUE}source ~/.zshrc${NC}
+Restart your terminal or run: ${BLUE}exec zsh -l${NC}
 
 ${YELLOW}Optional next steps:${NC}
 - Set up git user config: ${BLUE}git config --global user.name \"Your Name\"${NC}

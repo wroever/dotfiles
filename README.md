@@ -19,5 +19,5 @@ If you prefer to set up components individually:
 
 1. Create symlinks: `./symlink-setup.sh`
 2. Install Homebrew packages: `brew bundle`
-3. Install mise tools: `mise install`
+3. Trust and install mise tools: `mise trust .config/mise/config.toml && mise install`
 4. Apply macOS preferences: `./macos-defaults.sh`
