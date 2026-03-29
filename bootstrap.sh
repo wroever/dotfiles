@@ -106,6 +106,15 @@ else
     print_warning "mise not found. Install Homebrew packages first."
 fi
 
+# Step 6: Apply macOS preferences
+print_header "Applying macOS preferences..."
+if ask_confirmation "Apply preferences from macos-defaults.sh?"; then
+    bash "$DOTFILES_DIR/macos-defaults.sh"
+    print_success "macOS preferences applied"
+else
+    print_warning "Skipped macOS preferences"
+fi
+
 # Final summary
 print_header "Bootstrap complete!"
 echo -e "

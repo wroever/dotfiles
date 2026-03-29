@@ -11,6 +11,7 @@ The bootstrap script will:
 - Install all packages from Brewfile
 - Create symlinks for dotfiles
 - Optionally install mise tools
+- Optionally apply macOS preferences from `macos-defaults.sh`
 
 ## Manual Setup
 
@@ -19,3 +20,4 @@ If you prefer to set up components individually:
 1. Create symlinks: `./symlink-setup.sh`
 2. Install Homebrew packages: `brew bundle`
 3. Install mise tools: `mise install`
+4. Apply macOS preferences: `./macos-defaults.sh`
