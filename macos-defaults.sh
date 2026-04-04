@@ -15,6 +15,7 @@ fi
 # Disable "natural" scrolling so content follows the scroll wheel direction.
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 defaults write NSGlobalDomain com.apple.mouse.scaling -float 3
+defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3
 
 # Keyboard
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
